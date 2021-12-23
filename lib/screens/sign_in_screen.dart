@@ -1,25 +1,25 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:social_media_app/screens/sign_in_screen.dart';
+import 'package:social_media_app/screens/sign_up_screen.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
 
-  static const String id = "sign_up_screen";
+  static const String id = "sign_in_screen";
 
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
 
   final _formKey = GlobalKey<FormState>(); //нужно для Form()
 
   String _email = "";
-  String _username = "";
   String _password = "";
 
   final FocusNode _passwordFocusNode = FocusNode();
-  final FocusNode _usernameFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     textInputAction: TextInputAction.next,//Кнопка далее на клавиатуре
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_usernameFocusNode);
+                      FocusScope.of(context).requestFocus(_passwordFocusNode);
                     },
                     onSaved: (value) {
                       _email = value!.trim();
@@ -60,30 +60,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Please, enter your email";
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 15,),
-                  // user Name
-                  TextFormField(
-                    focusNode: _usernameFocusNode,
-                    decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        labelText: "Enter your username"
-                    ),
-                    textInputAction: TextInputAction.next,//Кнопка "далее" на клавиатуре
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_passwordFocusNode);
-                    },
-                    onSaved: (value) {
-                      _username = value!.trim();
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please, enter your user Name";
                       }
                       return null;
                     },
@@ -128,10 +104,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Text("Sign Up")),
                   SizedBox(height: 15,),
                   TextButton(onPressed: () {
-                    //Go to sign in screen
-                    Navigator.of(context).pushReplacementNamed(SignInScreen.id);
+                    //Go to sign up screen
+                    Navigator.of(context).pushReplacementNamed(SignUpScreen.id);
                   },
-                      child: Text("Sign In instead")),
+                      child: Text("Sign Up instead")),
                 ],
               ),
             ),
